@@ -1,0 +1,25 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int left = 0;
+        int right =0;
+        int m = s.length();
+        int n = t.length();
+        if( m==0 ){
+            return true;
+        }
+            while(right<n && left<m){
+            if(s.charAt(left)==t.charAt(right)){
+                left++;
+                right++;
+            }else {
+                right++;
+            }
+        }
+        if(left==m) return true;
+        if(left>=m && right>=n){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
