@@ -1,0 +1,31 @@
+import java.util.*;
+
+class Solution {
+    public String findCommonResponse(List<List<String>> responses) {
+        Map<String, Integer> freqMap = new HashMap<>();
+
+        
+        for (List<String> dayResponses : responses) { 
+            Set<String> uniqueResponses = new HashSet<>(dayResponses);
+
+            for (String response : uniqueResponses) {
+                freqMap.put(response, freqMap.getOrDefault(response, 0) + 1);
+            }
+        }
+
+        String mostCommonResponse = "";
+        int maxCount = 0;
+
+        for (Map.Entry<String, Integer> entry : freqMap.entrySet()) {
+            String response = entry.getKey();
+            int count = entry.getValue();
+
+            if (count > maxCount || (count == maxCount && response.compareTo(mostCommonResponse) < 0)) {
+                mostCommonResponse = response;
+                maxCount = count;
+            }
+        }
+
+        return mostCommonResponse;
+    }
+}
