@@ -1,0 +1,23 @@
+class Solution {
+    public ListNode mergeNodes(ListNode head) {
+        ListNode curr = head.next;
+        ListNode pointer = head;
+        int sum = 0;
+        
+        while (curr != null) {
+            if (curr.val == 0) {
+                pointer.val = sum;
+                if(curr.next != null){
+                    pointer = pointer.next;
+                }
+                sum = 0;
+            } else {
+                sum += curr.val;
+            }
+            curr = curr.next; 
+        }
+        
+        pointer.next = null;
+        return head;
+    }
+}
