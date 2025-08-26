@@ -1,0 +1,25 @@
+class Solution {
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        return solve(0,nums.length-1,nums);
+    }
+    TreeNode solve(int st,int end,int nums[])
+    {
+        if(st>end)
+        return null;
+        
+        int maxind=st;
+
+        for(int i=st+1;i<=end;i++)
+        {
+            if(nums[maxind]<nums[i])
+            {
+                maxind=i;
+            }
+        }
+
+        TreeNode root=new TreeNode(nums[maxind]);
+        root.left=solve(st,maxind-1,nums);
+        root.right=solve(maxind+1,end,nums);
+        return root;
+    }
+}
