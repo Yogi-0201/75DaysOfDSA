@@ -1,0 +1,29 @@
+class Solution {
+    public TreeNode bstFromPreorder(int[] preorder) {
+        if (preorder.length == 0) return null;
+        
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode root = new TreeNode(preorder[0]);
+        stack.push(root);
+        
+        for (int i = 1; i < preorder.length; i++) {
+            TreeNode node = new TreeNode(preorder[i]);
+            TreeNode parent = null;
+            
+            // Find the correct parent for the current node
+            while (!stack.isEmpty() && stack.peek().val < preorder[i]) {
+                parent = stack.pop();
+            }
+            
+            if (parent != null) {
+                parent.right = node;
+            } else {
+                stack.peek().left = node;
+            }
+            
+            stack.push(node);
+        }
+        
+        return root;
+    }
+}
