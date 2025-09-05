@@ -1,0 +1,27 @@
+class Solution {
+    public int minSetSize(int[] arr) {
+        int max = 0;
+          int n=arr.length;
+        for (int num : arr) {
+            if (num > max) max = num;
+        }
+
+        int[] freq = new int[max + 1]; // frequency array of size (max+1)
+
+        for (int num : arr) {
+            freq[num]++;
+        }
+        Arrays.sort(freq);
+        int remove=0;
+        int elements=0;
+
+        for(int i=freq.length-1;i>=0;i--){
+            remove+=freq[i];
+            elements++;
+            if(remove>=n/2){
+                break;
+            }
+        }
+        return elements;
+    }
+}
